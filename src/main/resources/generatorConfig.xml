@@ -1,0 +1,43 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="config.properties"/>
+
+    <context id="simple" targetRuntime="MyBatis3">
+        <property name="autoDelimitKeywords" value="true" />
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <!-- 为模型生成序列化方法-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- 生成mapper.xml时覆盖文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <!--生成插件-->
+        <plugin type="com.gaoj.mbg.plugins.MyGeneratorPlugin"/>
+
+        <!--注释插件-->
+        <commentGenerator type="com.gaoj.mbg.plugins.MyCommentPlugin"/>
+        <!--数据库连接-->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}"/>
+
+        <javaModelGenerator targetPackage="${javaModel.targetPackage}" targetProject="${javaModel.targetProject}"/>
+
+        <sqlMapGenerator targetPackage="${sqlMap.targetPackage}" targetProject="${sqlMap.targetProject}"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${javaClient.targetPackage}" targetProject="${javaClient.targetProject}"/>
+
+        <table tableName="award" domainObjectName="Award"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false" />
+        </table>
+
+    </context>
+</generatorConfiguration>
